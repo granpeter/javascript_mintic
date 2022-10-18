@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     
+    <h1>Listado de Autores </h1>
+    <ul id="autores">
+     </ul>
+   <script>
+      
+      function crearEtiquetaHija(element) {
+           return document.createElement(element);
+         }
+
+         function asociarEtiquetaPadre(parent, el) {
+                return parent.appendChild(el);
+         }
+      
+      const ul = document.getElementById('autores');  // nos paramos en el nodo o etiqueta autores
+       const url = 'https://randomuser.me/api/?results=30';// definimos la url donde vamos a consultar los datos
+
+       fetch(url) // me va a traer los datos de la url pasada por parametro
+       .then ((resp) => resp.json())
+       .then( function(data) {
+        let autores = data.results; // listemos todos los autores y guardemelos en la variable autores
+          return autores.map( function(autor) { 
+            let li = crearEtiquetaHija('li');
+            li.style='color: #111111; font-size: 20pt';
+            let img = crearEtiquetaHija('img'); 
+            let span = crearEtiquetaHija('span');
+            img.src = autor.picture.large; // especifico el atributo con la ruta de la imagen
+            span.innerHTML = `${autor.name.first} ${autor.name.last}`;
+            asociarEtiquetaPadre(li,img);
+            asociarEtiquetaPadre(li,span); 
+            asociarEtiquetaPadre(ul,li);
+          } ) 
+
+       })
+       .catch(function(error) {
+         console.log(error);
+        });
+
+
+   </script>     
+  
+
+
+</body>
+</html>
