@@ -11,7 +11,8 @@
     <ul id="authors"></ul>
     
     <script>
-
+     
+     
         
         function createNode(element) {
            return document.createElement(element);
@@ -22,11 +23,12 @@
          }
 
        const ul = document.getElementById('authors');
-       const url = 'https://randomuser.me/api/?results=10';
+       const url = 'https://randomuser.me/api/?results=30';
 
-    fetch(url)
-    .then((resp) => resp.json())
-    .then(function(data) {
+   /*   1. Definición de estructura promesa 
+    fetch(url) // invovación a la funcion promesa
+    .then((resp) => resp.json()) // la promesa se resonda positiva
+    .then(function(data) {       // la promesa se resonda positiva    
     let authors = data.results;
      return authors.map (function(author) {
        let li = createNode('li');
@@ -39,9 +41,30 @@
       append(ul, li);
   })
 })
-.catch(function(error) {
+.catch(function(error) { // la promesa se responda negativamente
   console.log(error);
 });
+      */
+    
+        // 2. Definición de estructura promesa utilizando las palabras Await y Sync
+        const fetchSync = async() =>{  
+           const resp =  await fetch (url);//conectando a la api
+           const data = await resp.json();
+           let authors = data.results;
+           return authors.map (function(author) {
+             let li = createNode('li');
+             li.style='color: #111111; font-size: 30pt';
+             let img = createNode('img');
+             let span = createNode('span');
+             img.src = author.picture.medium;
+             span.innerHTML = `${author.name.first} ${author.name.last}`;
+             append(li, img);
+             append(li, span);
+             append(ul, li); 
+           })
+        };//fin de funcion fetchSYnc   
+        fetchSync ();// invocar la función    
+          
     </script>
 
 </body>
