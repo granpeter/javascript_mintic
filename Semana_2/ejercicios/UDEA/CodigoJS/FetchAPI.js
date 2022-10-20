@@ -18,30 +18,30 @@ peticion
     })
     .catch('error'+console.warn);
 
-/*/Async 
+/*/Async */
 const getImagenPromesa = () => {
     const promesa = new Promise((resolve, reject) => {
         resolve('https://2.bp.blogspot.com/-3d92ta4_JEc/TvmzTTgNBKI/AAAAAAAACJ4/GFC9bCwM5vQ/s1600/imagenes-jpg-712861.jpg')
     })
     return promesa;
 }
-getImagenPromesa().then(console.log);no
+getImagenPromesa().then(console.log);
 
 
 const getImagen = async() => {
     return('https://2.bp.blogspot.com/-3d92ta4_JEc/TvmzTTgNBKI/AAAAAAAACJ4/GFC9bCwM5vQ/s1600/imagenes-jpg-712861.jpg')
     }
     getImagen().then(console.log);
-      */
+      
 //Await 
   
-/*
-const getImagen = async()=> {
-        const apiKey = '9ymPjCwD0DROveEYL04V7pN3ViG0Pacm';
+
+const getImagenSync = async()=> {
+        const apiKey = '3wTLC3CMiQpNDRTsg05mKpa0xrtCSNda';
         const resp = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${apiKey}`);
         const data = await resp.json();
 
         console.log(data)
     };
-    getImagen();
-*/    
+    getImagenSync();
+    
